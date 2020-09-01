@@ -1,0 +1,47 @@
+<html>
+
+<head>
+
+	<script>
+		var r = [];
+		function oc() {
+			console.log("called");
+			var txt = document.getElementById("uinput").value;
+
+			r.push(txt);
+			console.log(r);
+			document.getElementById("display").innerHTML += '<li class=listitem>' + txt + "</li>";
+		}
+	</script>
+
+	<style>
+		body {
+			background-color:aquamarine;
+			padding: 5%;
+		}
+
+		.listitem {
+			font-family: 'Trebuchet MS';
+			list-style-type: none;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div>
+		<input type="text" id="uinput">
+		<button onClick="oc()">Send</button>
+	</div>
+
+	<div>
+		<ul id="display">
+
+		</ul>
+
+	</div>
+
+</body>
+
+</html>
