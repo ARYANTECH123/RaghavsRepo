@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <title>RAMAISPL</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: blanchedalmond;
+            margin: 0%;
+        }
+
+        .heading {
+            max-width: max-content;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .main-content {
+            font-family: 'Source Code Pro', monospace;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .term {
+            color: green
+        }
+
+        .input {
+            display:flex;
+            color:green;
+        }
+
+        .linein {
+            background-color: black;
+            color:green
+        }
+
+        .authbox {
+            color: red;
+            display:none;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="heading">
+       <pre> 
+______    
+/\  == \   
+\ \  __&lt   
+ \ \_\ \_\ 
+  \/_/ /_/</pre>
+
+       <pre>
+______
+/\  __ \   
+\ \  __ \  
+ \ \_\ \_\ 
+  \/_/\/_/
+       </pre>
+
+       <pre>
+ __    __
+/\ "-./  \   
+\ \ \-./\ \  
+ \ \_\ \ \_\ 
+  \/_/  \/_/ 
+       </pre>
+
+       <pre>
+ _____    
+/\  __ \   
+\ \  __ \  
+ \ \_\ \_\ 
+  \/_/\/_/ 
+       </pre>
+       <pre>
+  __
+ /\ \   
+ \ \ \  
+  \ \_\ 
+   \/_/ 
+       </pre>
+
+       <pre>
+ ______    
+/\  ___\   
+\ \___  \  
+ \/\_____\ 
+  \/_____/
+        </pre>
+       
+       <pre>
+ ______
+/\  == \ 
+\ \  _-/ 
+ \ \_\   
+  \/_/   
+       </pre>
+       
+       <pre>
+ __        
+ \ \       
+  \ \ \____  
+   \ \_____\ 
+    \/_____/ 
+       </pre>
+    </div>
+
+    <div class="main-content">
+        <h3>Home of RAMAISPL</h3>
+        <p>The top tier investigation group that uses advanced systems and technologies to track and reasearch subjects.</p>
+        <p>Use the termianl below to acsess RAMAISPL files</p>
+        <p>Type `list` to start using the RASH (Raghav Again SHell)</p>
+        <p class="authbox" id="authbox">AUTHORIZED USER</p>
+    
+
+        <br><br>
+        <pre class="term" id="term"></pre>
+        <div class="input">
+            &gt<input class="linein" id="linein">
+    
+        </div>
+    </div>
+
+    <script>
+        // Utility commands
+        function echo(str) {
+            $("#term").append(
+               str + "<br>"
+            );
+            $("#linein").val('');
+        };
+        var isAuth = false;
+        echo("Hello! RASH 0.0.1, noauth");
+        
+        // To addd commands,
+        // First, add the command to the "commands" array
+        // Then, add a description to the "description" array
+        // Lastly, add a callback function to the "callback" array
+        // All 3 additions must be at the same corrosponding index
+
+        const commands = [
+            "list",
+            "clear",
+            "whoami"
+        ];
+
+        const description = [
+            "lists all commands",
+            "clears screen",
+            "returns a name"
+        ];
+
+        const callbacks = [
+            () => { // Handle list commmand
+                for(i = 0; i < commands.length; i++) {
+                    echo(commands[i] + " : " + description[i]);
+                };
+            },
+
+            () => { // Handles clear command
+                $("#term").empty();
+            },
+
+            () => { // Hanldes whoami command
+                echo("User # 157364");
+            }
+        ];
+
+
+        function handleInput() {
+            command = $('#linein').val();
+            echo("> " + command);
+            console.log(command);
+            console.log(commands.indexOf(command));
+            if(commands.indexOf(command) >= 0) {
+                index = commands.indexOf(command);
+                callbacks[index]();
+            }
+            else {
+                echo("Invalid commmand");
+            }
+        }
+
+        // Event binder
+        $("#linein").keypress((event) => {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == 13) {
+                handleInput();
+            }
+        })
+
+    </script>
+</body>
+</html>
